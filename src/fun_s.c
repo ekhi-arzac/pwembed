@@ -4,6 +4,7 @@
  rutinas que se utilizan en el modulo grupopal_s.c
 ****************************************************/
 #include "defineg.h" // definiciones
+#include <float.h>
 #include <math.h>
 #include <stdlib.h>
 
@@ -30,8 +31,20 @@ vector de tamanno MAXV, por ref.
 ************************************************************************************/
 void grupo_cercano(int nvec, float mvec[][NDIM], float cent[][NDIM],
                    int *popul) {
-  // PARA COMPLETAR
-  // popul: grupo mas cercano a cada elemento
+  int i, j;
+
+  for (i = 0; i < nvec; i++) {
+    double min_dist = DBL_MAX; // Infinito
+    int min_index = -1;
+    for (j = 0; j < ngrupos; j++) {
+      double distancia = gendist(mvec[i], cent[j]);
+      if (distancia < min_dist) {
+        min_dist = distancia;
+        min_index = j;
+      }
+    }
+    popul[i] = min_index;
+  }
 }
 
 /***************************************************************************************
