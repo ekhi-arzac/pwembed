@@ -60,7 +60,10 @@ clusters
 ****************************************************************************************/
 double silhouette_simple(float mvec[][NDIM], struct lista_grupos *listag,
                          float cent[][NDIM], float a[]) {
-  // float b[ngrupos];
+
+  int i, j, k;
+  double distancia;
+  float b[ngrupos];
 
   // PARA COMPLETAR
 
@@ -68,16 +71,44 @@ double silhouette_simple(float mvec[][NDIM], struct lista_grupos *listag,
   //		media de las distancia entre todos los elementos del grupo;
   //   	si el numero de elementos del grupo es 0 o 1, densidad = 0
   // ...
+  int nvecg;
+  for (i = 0; i < ngrupos; i++) {
+    nvecg = listag[i].nvecg;
 
+    if (nvecg <= 1) {
+      a[i] = 0;
+    } else {
+      distancia = 0;
+      for (j = 0; j < listag[i].nvecg; j++) {
+        for (k = j; k < listag[i].nvecg; k++) {
+          distancia +=
+              gendist(mvec[listag[i].vecg[k]], mvec[listag[i].vecg[j]]);
+        }
+      }
+      a[i] = distancia / pow(listag[i].nvecg, 2);
+    }
+  }
   // aproximar b[i] de cada cluster
   // ...
 
+  for (i = 0; i < ngrupos; i++) {
+    distancia = 0;
+    for (j = 0; j < ngrupos; j++) {
+      if (i != j)
+        distancia += gendist(cent[i], cent[j]);
+    }
+    b[i] = (distancia) / (ngrupos - 1);
+  }
   // calcular el ratio s[i] de cada cluster
   // ...
-
+  double s = 0;
+  for (i = 0; i < ngrupos; i++) {
+    s += ((b[i] - a[i]) / max(a[i], b[i]));
+  }
   // promedio y devolver
   // ...
-  return 0.0;
+  s /= ngrupos;
+  return s;
 }
 
 /********************************************************************************************
