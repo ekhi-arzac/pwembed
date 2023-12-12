@@ -130,8 +130,8 @@ void analisis_campos(struct lista_grupos *listag, float mcam[][NCAM],
   //Recorrer grupos
   for (i = 0; i < ngrupos; i++) {
     nvecg = listag[i].nvecg;
-    int indicesMax [nvecg][2];
-    int indicesMin [nvecg][2];
+    float indicesMax [nvecg][2];
+    float indicesMin [nvecg][2];
     //Recorrer Palabras
       for (j = 0; j < nvecg; j++) {
         // double distancias[listag[i].nvecg][NCAM];
