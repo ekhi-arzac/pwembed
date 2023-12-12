@@ -181,15 +181,15 @@ void analisis_campos(struct lista_grupos *listag, float mcam[][NCAM],
       dim = listag[j].nvecg;
       if (dim != 0)
       {
-        float vector[dim];
+        float campo_grp[dim];
 
         for (k = 0; k < dim; k++)
         {
-          vector[k] = mcam[listag[j].vecg[k]][i];
+          campo_grp[k] = mcam[listag[j].vecg[k]][i];
         }
 
-        bubbleSort(vector, dim);
-        float mediana = vector[dim / 2];
+        bubbleSort(campo_grp, dim);
+        float mediana = campo_grp[dim / 2];
 
         if (mediana > mediana_max)
         {
