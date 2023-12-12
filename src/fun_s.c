@@ -31,13 +31,13 @@ vector de tamanno MAXV, por ref.
 ************************************************************************************/
 void grupo_cercano(int nvec, float mvec[][NDIM], float cent[][NDIM],
                    int *popul) {
-  int i, j;
-
+  int i, j, min_index;
+  double min_dist, distancia;
   for (i = 0; i < nvec; i++) {
-    double min_dist = DBL_MAX; // Infinito
-    int min_index = -1;
+    min_dist = DBL_MAX; // Infinito
+    min_index = -1;
     for (j = 0; j < ngrupos; j++) {
-      double distancia = gendist(mvec[i], cent[j]);
+      distancia = gendist(mvec[i], cent[j]);
       if (distancia < min_dist) {
         min_dist = distancia;
         min_index = j;
@@ -112,7 +112,7 @@ double silhouette_simple(float mvec[][NDIM], struct lista_grupos *listag,
 }
 
 /********************************************************************************************
- 4 - Funcion para relizar el analisis de campos UNESCO
+ 4 - Funcion para realizar el analisis de campos UNESCO
  Entrada:  listag   vector de ngrupos structs (informacion de grupos generados),
 por ref. mcam     campos, una matriz de tamaño MAXV x NCAM, por referencia
  Salida:   info_cam vector de NCAM structs (informacion del analisis realizado),
@@ -122,8 +122,25 @@ void analisis_campos(struct lista_grupos *listag, float mcam[][NCAM],
                      struct analisis *info_cam) {
   // PARA COMPLETAR
   // Realizar el analisis de campos UNESCO en los grupos:
+  int i, j, k;
+  int indices [NCAM];
+
+  for (i = 0; i < ngrupos; i++) {
+    nvecg = listag[i].nvecg;
+      for (j = 0; j < listag[i].nvecg; j++) {
+        double distancias[listag[i].nvecg][NCAM];
+        for (k = j; k < NCAM; k++) {
+          distancias[j][k] = gendist(mvec[listag[i].vecg[j]], mcam[listag[i].vecg[j]][k]);
+        }
+      }
+      
+  }
+
+
   //    mediana maxima y el grupo en el que se da este maximo (para cada campo)
+  
   //    mediana minima y su grupo en el que se da este minimo (para cada campo)
+
 }
 
 /*************************************
@@ -181,3 +198,8 @@ int nuevos_centroides(float mvec[][NDIM], float cent[][NDIM], int popul[],
   }
   return fin;
 }
+
+/*************************************
+  Bubble Sort
+**************************************/
+
