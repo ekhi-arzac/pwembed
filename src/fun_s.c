@@ -123,17 +123,37 @@ void analisis_campos(struct lista_grupos *listag, float mcam[][NCAM],
   // PARA COMPLETAR
   // Realizar el analisis de campos UNESCO en los grupos:
   int i, j, k;
-  int indices [NCAM];
-
+  //Para las listas indicesMax e indicesMin
+  int valor = 0;
+  int indice = 1;
+  
+  //Recorrer grupos
   for (i = 0; i < ngrupos; i++) {
     nvecg = listag[i].nvecg;
-      for (j = 0; j < listag[i].nvecg; j++) {
-        double distancias[listag[i].nvecg][NCAM];
+    int indicesMax [nvecg][2];
+    int indicesMin [nvecg][2];
+    //Recorrer Palabras
+      for (j = 0; j < nvecg; j++) {
+        // double distancias[listag[i].nvecg][NCAM];
+        indicesMax[j][valor]=0;
+        indicesMin[j][valor]=1;
+        //Recorrer campos UNESCO
         for (k = j; k < NCAM; k++) {
-          distancias[j][k] = gendist(mvec[listag[i].vecg[j]], mcam[listag[i].vecg[j]][k]);
+          //La probabilidad es mayor a la maxima actual
+          if(mcam[listag[i].vecg[j]][k] > indicesMax[j][valor]){
+            indicesMax[j][valor] = mcam[listag[i].vecg[j]][k];
+            indicesMax[j][indice] = k;
+          }
+          //La probabilidad es menor a la minima actual
+          if(mcam[listag[i].vecg[j]][k] < indicesMin[j][valor]){
+            indicesMin[j][valor] = mcam[listag[i].vecg[j]][k];
+            indicesMin[j][indice] = k;
+          }
         }
       }
-      
+      //Medianas
+
+     //Analisis 
   }
 
 
