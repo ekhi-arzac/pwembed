@@ -1,0 +1,2 @@
+gcc -o grupopal_s ./src/fun_s.c ./src/grupopal_s.c -O2 -lm &&
+grupopal_s ../ARQ/ppalabras/vecpal.dat ../ARQ/ppalabras/campos.dat 1000

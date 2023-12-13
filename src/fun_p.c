@@ -6,6 +6,7 @@
 #include "defineg.h" // definiciones
 #include <float.h>
 #include <math.h>
+#include <omp.h>
 #include <stdlib.h>
 
 /*******************************************************************
@@ -16,6 +17,8 @@
 double gendist(float *vec1, float *vec2) {
   double distancia = 0.0;
   int i;
+
+#pragma omp for private(i) reduction(+ : distancia)
   for (i = 0; i < NDIM; i++) {
     distancia += (vec2[i] - vec1[i]) * (vec2[i] - vec1[i]);
   }
@@ -32,7 +35,6 @@ vector de tamanno MAXV, por ref.
 void grupo_cercano(int nvec, float mvec[][NDIM], float cent[][NDIM],
                    int *popul) {
   int i, j;
-
   for (i = 0; i < nvec; i++) {
     double min_dist = DBL_MAX; // Infinito
     int min_index = -1;
