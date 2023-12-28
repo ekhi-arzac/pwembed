@@ -1,17 +1,13 @@
 /***************************************************
- AC - OpenMP -- SERIE
- fun_s.c
- rutinas que se utilizan en el modulo grupopal_s.c
+ AC - OpenMP -- PARALELO
+ fun_p.c
+ rutinas que se utilizan en el modulo grupopal_p.c
 ****************************************************/
 #include "defineg.h" // definiciones
 #include <float.h>
 #include <math.h>
 #include <stdlib.h>
-
-// double inline pow2(double n)
-// {
-//   return n * n;
-// }
+#include <omp.h>
 
 /*******************************************************************
  1 - Funcion para calcular la distancia euclidea entre dos vectores
