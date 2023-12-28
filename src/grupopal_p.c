@@ -1,11 +1,11 @@
 /****************************************************************************************
-    grupopal_s   SERIE
+    grupopal_s   PARALELO
 
     Entrada: vecpal.dat    fichero con las representaciones vectoriales de
 palabras campos.dat    fichero con la carcania de cada palabra a cada campo
-UNESCO Salida:  vecpal_s.out  centroides, densidad, analisis
+UNESCO Salida:  vecpal_p.out  centroides, densidad, analisis
 
-    compilar con el modulo fun_s.c y la opcion -lm
+    compilar con el modulo fun_p.c y la opcion -lm
 ******************************************************************************************/
 #include "defineg.h"
 #include "fun.h"
@@ -139,7 +139,7 @@ int main(int argc, char *argv[]) {
 
   // escritura de resultados en el fichero de salida
   // ===============================================
-  fd = fopen("vecpal_s.out", "w");
+  fd = fopen("vecpal_p.out", "w");
   if (fd == NULL) {
     printf("Error al abrir el fichero dbgen_out.s\n");
     exit(-1);
@@ -241,5 +241,5 @@ int main(int argc, char *argv[]) {
   printf("t_lec,%f\n", t_lec);
   printf("t_clust,%f\n", t_clust);
   printf("t_camp,%f\n", t_camp);
-  printf("Texe_s,%f\n", texe);
+  printf("Texe_p,%f\n", texe);
 }
